@@ -1,7 +1,7 @@
 package com.example.w3.information.web.servlet;
 
 import com.example.w3.information.department.Department;
-import com.example.w3.information.service.DeService;
+import com.example.w3.information.service.IDeService;
 import com.example.w3.information.service.impl.DeServiceImpl;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -16,11 +16,12 @@ public class FindDeServlet extends HttpServlet {
         String id = request.getParameter("did");
         if (id == null||"".equals(id)) {
             request.getRequestDispatcher("/FindDeByPageServlet").forward(request,response);
+        }else {
+            IDeService service = new DeServiceImpl();
+            Department de = service.findDe(id);
+            request.setAttribute("de", de);
+            request.getRequestDispatcher("/UpData.jsp").forward(request, response);
         }
-        DeService service = new DeServiceImpl();
-        Department de = service.findDe(id);
-        request.setAttribute("de", de);
-        request.getRequestDispatcher("/UpData.jsp").forward(request, response);
     }
 
     @Override

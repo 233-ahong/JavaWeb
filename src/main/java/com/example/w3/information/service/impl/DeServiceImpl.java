@@ -1,16 +1,16 @@
 package com.example.w3.information.service.impl;
 
-import com.example.w3.information.dao.DeDao;
-import com.example.w3.information.dao.impl.DeDaoImpl;
+import com.example.w3.information.dao.IDeDao;
+import com.example.w3.information.dao.impl.IDeDaoImpl;
 import com.example.w3.information.department.Department;
 import com.example.w3.information.department.PageBean;
-import com.example.w3.information.service.DeService;
+import com.example.w3.information.service.IDeService;
 
 import java.util.List;
 import java.util.Map;
 
-public class DeServiceImpl implements DeService {
-    private DeDao dao = new DeDaoImpl();
+public class DeServiceImpl implements IDeService {
+    private IDeDao dao = new IDeDaoImpl();
 
     @Override
     public List<Department> selectAll() {

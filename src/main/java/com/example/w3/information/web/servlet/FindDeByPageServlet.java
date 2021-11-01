@@ -2,7 +2,7 @@ package com.example.w3.information.web.servlet;
 
 import com.example.w3.information.department.Department;
 import com.example.w3.information.department.PageBean;
-import com.example.w3.information.service.DeService;
+import com.example.w3.information.service.IDeService;
 import com.example.w3.information.service.impl.DeServiceImpl;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -25,7 +25,7 @@ public class FindDeByPageServlet extends HttpServlet {
             rows = "5";
         }
         Map<String, String[]> condition = request.getParameterMap();
-        DeService service = new DeServiceImpl();
+        IDeService service = new DeServiceImpl();
         PageBean<Department> pb = service.findDeByPage(currentPage, rows, condition);
         request.setAttribute("pb", pb);
         request.setAttribute("condition",condition);

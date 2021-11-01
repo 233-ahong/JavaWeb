@@ -1,6 +1,6 @@
 package com.example.w3.information.dao.impl;
 
-import com.example.w3.information.dao.DeDao;
+import com.example.w3.information.dao.IDeDao;
 import com.example.w3.information.department.Department;
 import com.example.w3.information.utils.JDBCUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.*;
 
-public class DeDaoImpl implements DeDao {
+public class IDeDaoImpl implements IDeDao {
     private JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
     private String sql;
 

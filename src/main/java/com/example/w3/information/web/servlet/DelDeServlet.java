@@ -1,6 +1,6 @@
 package com.example.w3.information.web.servlet;
 
-import com.example.w3.information.service.DeService;
+import com.example.w3.information.service.IDeService;
 import com.example.w3.information.service.impl.DeServiceImpl;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -13,7 +13,7 @@ public class DelDeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String[] dids = request.getParameterValues("did");
-        DeService service = new DeServiceImpl();
+        IDeService service = new DeServiceImpl();
         service.delDeList(dids);
         response.sendRedirect(request.getContextPath() + "/DeListServlet");
     }

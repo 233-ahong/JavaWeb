@@ -4,6 +4,6 @@ import com.example.w3.web.bll.User;
 
 import java.util.List;
 
-public interface AdminService {
+public interface IAdminService {
     User login(User user);
 }

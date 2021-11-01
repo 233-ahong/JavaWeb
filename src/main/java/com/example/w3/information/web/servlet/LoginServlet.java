@@ -1,6 +1,6 @@
 package com.example.w3.information.web.servlet;
 
-import com.example.w3.information.service.AdminService;
+import com.example.w3.information.service.IAdminService;
 import com.example.w3.information.service.impl.AdminServiceImpl;
 import com.example.w3.web.bll.User;
 import jakarta.servlet.*;
@@ -35,11 +35,11 @@ public class LoginServlet extends HttpServlet {
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
-        AdminService admin = new AdminServiceImpl();
+        IAdminService admin = new AdminServiceImpl();
         User loginuser = admin.login(user);
         if (loginuser != null) {
             session.setAttribute("user", loginuser);
-            response.sendRedirect(request.getContextPath() + "/DeListServlet");
+            response.sendRedirect(request.getContextPath() + "/FindDeByPageServlet");
         } else {
             request.setAttribute("login_msg", "用户名或密码错误！");
             request.getRequestDispatcher("index.jsp").forward(request, response);

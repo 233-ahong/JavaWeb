@@ -6,7 +6,7 @@ import com.example.w3.information.department.PageBean;
 import java.util.List;
 import java.util.Map;
 
-public interface DeService {
+public interface IDeService {
     /**
      * 查询所有
      *

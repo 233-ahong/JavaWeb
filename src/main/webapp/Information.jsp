@@ -19,14 +19,14 @@
     <script src="js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
     <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
     <script src="js/bootstrap.min.js" crossorigin="anonymous"></script>
-    <title>Information</title>
+    <title>部门信息</title>
 </head>
 <body>
 <form action="${pageContext.request.contextPath}/FindDeByPageServlet" method="post">
     <div class="container col-6" style="float: left">
         <span style="margin-left: 14%">
             <label for="id">部门名</label><input id="id" value="${condition.name[0]}" type="text" name="name">
-            <label for="name">部门经理</label><input id="name" value="${condition.dmanager[0]}"type="text" name="dmanager">
+            <label for="name">部门经理</label><input id="name" value="${condition.dmanager[0]}" type="text" name="dmanager">
             <input id="add" type="submit" value="查询">
         </span>
     </div>
@@ -36,36 +36,36 @@
     <a class="btn btn-primary" id="delDe">删除选中</a>
     <a class="btn btn-primary" id="upDe">修改部门</a>
 </div>
-<div>
-    <form id="from" name="from">
-        <table class="table table-hover container">
-        <thead>
-        <tr>
-            <th><input type="checkbox" id="cb"></th>
-            <th scope="col">#</th>
-            <th scope="col">部门名称</th>
-            <th scope="col">部门人数</th>
-            <th scope="col">部门经理</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${pb.list}" var="department" varStatus="s">
+<div class="container" style="height: 50%">
+    <form id="from" name="from" method="post">
+        <table class="table table-hover container" >
+            <thead>
             <tr>
-                <td><input type="checkbox" name="did" value="${department.id}"></td>
-                <td>${s.count}</td>
-                <td>${department.name}</td>
-                <td>${department.pnumber}</td>
-                <td>${department.dmanager}</td>
+                <th><input type="checkbox" id="cb"></th>
+                <th scope="col">#</th>
+                <th scope="col">部门名称</th>
+                <th scope="col">部门人数</th>
+                <th scope="col">部门经理</th>
             </tr>
-        </c:forEach>
-        </tbody>
+            </thead>
+            <tbody>
+            <c:forEach items="${pb.list}" var="department" varStatus="s">
+                <tr>
+                    <td><input type="checkbox" name="did" value="${department.id}"></td>
+                    <td>${s.count}</td>
+                    <td>${department.name}</td>
+                    <td>${department.pnumber}</td>
+                    <td>${department.dmanager}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
 
-    </table>
+        </table>
     </form>
 </div>
-<div class="carousel-caption">
-    <div class="d1">
-        <nav aria-label="Page navigation <%--example--%>">
+<div class="container">
+    <div class="d1" style="float: left">
+        <nav aria-label="Page navigation example">
             <ul class="pagination">
                 <c:if test="${pb.currentPage==1}">
                     <li class="page-item disabled">
@@ -74,10 +74,11 @@
                 </c:if>
                 <c:if test="${pb.currentPage!=1}">
                     <li class="page-item">
-                    <a class="page-link" href="${pageContext.request.contextPath}/FindDeByPageServlet?currentPage=${pb.currentPage-1}&rows=5&name=${condition.name[0]}&dmanager=${condition.dmanager[0]}"
-                       aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
+                        <a class="page-link"
+                           href="${pageContext.request.contextPath}/FindDeByPageServlet?currentPage=${pb.currentPage-1}&rows=5&name=${condition.name[0]}&dmanager=${condition.dmanager[0]}"
+                           aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
                     </li>
                 </c:if>
                 <c:forEach begin="1" end="${pb.totalPage}" var="i">
@@ -87,8 +88,8 @@
                         </li>
                     </c:if>
                     <c:if test="${pb.currentPage!=i}">
-                        <li class="page-item" ><a class="page-link"
-                                                         href="${pageContext.request.contextPath}/FindDeByPageServlet?currentPage=${i}&rows=5&name=${condition.name[0]}&dmanager=${condition.dmanager[0]}
+                        <li class="page-item"><a class="page-link"
+                                                 href="${pageContext.request.contextPath}/FindDeByPageServlet?currentPage=${i}&rows=5&name=${condition.name[0]}&dmanager=${condition.dmanager[0]}
                     ">${i}</a></li>
                     </c:if>
                 </c:forEach>
@@ -106,17 +107,14 @@
                         </a>
                     </li>
                 </c:if>
-                <li>
-                    <span style="font-size: 25px;margin-left: 10px">
-                        共${pb.totalCount}条记录，共${pb.totalPage}页
-                    </span>
-                </li>
-
             </ul>
         </nav>
-
     </div>
-
+    <div class="col-6" style="float: left">
+        <span style="font-size: 25px;margin-left: 10px">
+            共${pb.totalCount}条记录，共${pb.totalPage}页
+        </span>
+    </div>
 </div>
 
 </body>
@@ -124,33 +122,48 @@
 
 </style>
 <script>
-    window.onload=function (){
-        document.getElementById("delDe").onclick=function (){
-            ${'from'}.action="${pageContext.request.contextPath}/DelDeServlet";
-            if (confirm("您确定要删除选中条目吗？")){
-                var flag=false;
+    window.onload = function () {
+        document.getElementById("delDe").onclick = function () {
+            ${'from'}.
+            action = "${pageContext.request.contextPath}/DelDeServlet";
+            if (confirm("您确定要删除选中条目吗？")) {
+                var flag = false;
                 var cbs = document.getElementsByName("did");
-                for (var i=0;i<cbs.length;i++){
-                    if(cbs[i].checked){
-                        flag=true;
+                for (var i = 0; i < cbs.length; i++) {
+                    if (cbs[i].checked) {
+                        flag = true;
                         break;
                     }
                 }
-                if (flag){
+                if (flag) {
                     document.getElementById("from").submit();
                 }
             }
         }
-        document.getElementById("upDe").onclick=function (){
-            var cbs=document.getElementsByName("did");
-            var id=$(cbs).parent("tr").find(${department.id}).text();
-            ${'from'}.action="${pageContext.request.contextPath}/FindDeServlet?id=id";
-            document.getElementById("from").submit();
-        }
-        document.getElementById("cb").onclick=function (){
+        document.getElementById("upDe").onclick = function () {
             var cbs = document.getElementsByName("did");
-            for (var i=0;i<cbs.length;i++){
-                cbs[i].checked=this.checked;
+            var id = $(cbs).parent("tr").find(${department.id}).text();
+            ${'from'}.
+            action = "${pageContext.request.contextPath}/FindDeServlet?id=id";
+            var flag = false;
+            for (var i = 0; i < cbs.length; i++) {
+                if (cbs[i].checked) {
+                    flag = true;
+                    break;
+                }
+                else {
+                    alert("请选择需要修改的部门！");
+                    break;
+                }
+            }
+            if (flag) {
+                document.getElementById("from").submit();
+            }
+        }
+        document.getElementById("cb").onclick = function () {
+            var cbs = document.getElementsByName("did");
+            for (var i = 0; i < cbs.length; i++) {
+                cbs[i].checked = this.checked;
             }
         }
     }

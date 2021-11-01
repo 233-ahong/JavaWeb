@@ -5,7 +5,7 @@ import com.example.w3.information.department.Department;
 import java.util.List;
 import java.util.Map;
 
-public interface DeDao {
+public interface IDeDao {
     public List<Department> selectAll();
 
     void addDe(Department department);

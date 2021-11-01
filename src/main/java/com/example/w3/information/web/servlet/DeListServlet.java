@@ -1,7 +1,7 @@
 package com.example.w3.information.web.servlet;
 
 import com.example.w3.information.department.Department;
-import com.example.w3.information.service.DeService;
+import com.example.w3.information.service.IDeService;
 import com.example.w3.information.service.impl.DeServiceImpl;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -14,7 +14,7 @@ import java.util.List;
 public class DeListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        DeService service = new DeServiceImpl();
+        IDeService service = new DeServiceImpl();
         List<Department> departments = service.selectAll();
         request.setAttribute("departments", departments);
         request.getRequestDispatcher("/FindDeByPageServlet").forward(request, response);

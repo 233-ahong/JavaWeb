@@ -1,7 +1,7 @@
 package com.example.w3.information.web.servlet;
 
 import com.example.w3.information.department.Department;
-import com.example.w3.information.service.DeService;
+import com.example.w3.information.service.IDeService;
 import com.example.w3.information.service.impl.DeServiceImpl;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -26,7 +26,7 @@ public class UpDeServlet extends HttpServlet {
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
-        DeService service = new DeServiceImpl();
+        IDeService service = new DeServiceImpl();
         service.upData(department);
         response.sendRedirect(request.getContextPath() + "/FindDeByPageServlet");
     }
